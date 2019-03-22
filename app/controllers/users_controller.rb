@@ -9,4 +9,10 @@ class UsersController < ApplicationController
     erb :"users/show"
   end
 
+  get "/signup" do
+    if !logged_in?
+      erb :"users/signup"
+    end
+  end
+
 end
