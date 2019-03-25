@@ -9,7 +9,7 @@
     <label>Available products: </label>
     <ul>
       <% @user.products.each do |product| %>
-        <li><%= product.name %>: <%= product.quantity %> <%= product.unit %></li>
+        <li><a href="/products/<%= product.id %>"><%= product.name %>: <%= product.quantity %> <%= product.unit %></a></li>
       <% end %>
     </ul>
   </li>

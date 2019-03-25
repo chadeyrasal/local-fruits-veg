@@ -47,10 +47,10 @@ class ProductsController < ApplicationController
   patch "/products/:id" do
     if logged_in?
       if params[:name] == "" || params[:quantity] == ""
-        redirect "/product/#{params[:id]}/edit"
+        redirect "/products/#{params[:id]}/edit"
       else
         @product = Product.find_by(:id => params[:id])
-        if @product.user == current_user
+        if @product && @product.user == current_user
           @product.name = params[:name]
           @product.quantity = params[:quantity]
           @product.unit = params[:unit]
