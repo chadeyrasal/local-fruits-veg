@@ -38,7 +38,11 @@ class ProductsController < ApplicationController
   get "/products/:id/edit" do
     if logged_in?
       @product = Product.find_by(:id => params[:id])
-      erb :"products/edit"
+      if @product && @product.user == current_user
+        erb :"products/edit"
+      else
+        redirect "/products/#{@product.id}"
+      end
     else
       redirect "/"
     end
@@ -65,15 +69,13 @@ class ProductsController < ApplicationController
     end
   end
 
-  delete "/products/:id" do
+  post "/products/:id" do
     if logged_in?
       @product = Product.find_by(:id => params[:id])
       if @product && @product.user == current_user
-        @product.destroy
-        redirect "/products"
-      else
-        redirect "/products"
+        @product.delete
       end
+      redirect "/products"
     else
       redirect "/"
     end

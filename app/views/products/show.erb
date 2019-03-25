@@ -3,11 +3,11 @@
 <br><br>
 
 <label> Quantity: </label>
-<%= @product.quantity %>
+<%= @product.quantity %> <%= @product.unit %>
 <br><br>
 
-<label> Unit: </label>
-<%= @product.unit %>
+<label>Product seller: </label>
+<a href="/users/<%= @product.user.slug %>"><%= @product.user.username %></a>
 <br><br>
 
 <button><a href="/products/<%= @product.id %>/edit">Edit product</a></button>
