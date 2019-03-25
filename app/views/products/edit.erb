@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h2>Edit this product: </h2>
 
 <form action="/products/<%= @product.id %>" method="post">
