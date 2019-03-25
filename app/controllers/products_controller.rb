@@ -65,4 +65,18 @@ class ProductsController < ApplicationController
     end
   end
 
+  delete "/products/:id" do
+    if logged_in?
+      @product = Product.find_by(:id => params[:id])
+      if @product && @product.user == current_user
+        @product.delete
+        redirect "/products"
+      else
+        redirect "/products"
+      end
+    else
+      redirect "/"
+    end
+  end
+
 end
