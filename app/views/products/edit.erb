@@ -1,0 +1,19 @@
+<h2>Edit this product: </h2>
+
+<form action="/products/<%= @product.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+  <label>Product Name: </label>
+  <input type="text" name="name" value="<%= @product.name %>">
+  <br><br>
+
+  <label>Quantity: </label>
+  <input type="text" name="quantity" value="<%= @product.quantity %>">
+  <br><br>
+
+  <label>Unit: </label>
+  <input type="text" name="unit" value="<%= @product.unit %>">
+  <br><br>
+
+  <input type="submit" value="Save changes">
+</form>
