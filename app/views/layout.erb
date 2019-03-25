@@ -9,6 +9,7 @@
     <% if logged_in? %>
       <%= "You are logged in as " %><a href="/users/<%= current_user.slug %>"><%= current_user.username %></a>
     <% end %>
+    <br><br>
     <%= yield %>
   </body>
 </html>
