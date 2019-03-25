@@ -8,8 +8,9 @@
   <li>
     <label>Available products: </label>
     <ul>
-      <li>Product 1</li>
-      <li>Product 2</li>
+      <% @user.products.each do |product| %>
+        <li><%= product.name %>: <%= product.quantity %> <%= product.unit %></li>
+      <% end %>
     </ul>
   </li>
 </ul>
