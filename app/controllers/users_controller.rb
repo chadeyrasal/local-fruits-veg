@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     if logged_in?
       erb :"users/index"
     else
-      flash[:message] = "Please signup or login to access this page"
+      flash[:errors] = "Please signup or login to access this page"
       redirect "/"
     end
   end
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       @user = User.find_by_slug(params[:slug])
       erb :"users/show"
     else
-      flash[:message] = "Please signup or login to access this page"
+      flash[:errors] = "Please signup or login to access this page"
       redirect "/"
     end
   end
@@ -23,17 +23,17 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :"users/signup"
     else
-      flash[:message] = "You already have an account"
+      flash[:errors] = "You already have an account"
       redirect "/products"
     end
   end
 
   post "/signup" do
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
-      flash[:message] = "Please fill out all fields to create an account"
+      flash[:errors] = "Please fill out all fields to create an account"
       redirect "/signup"
     elsif User.find_by(:username => params[:username])
-      flash[:message] = "This username is already in use. Please login"
+      flash[:errors] = "This username is already in use. Please login"
       redirect "/login"
     else
       @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :"users/login"
     else
-      flash[:message] = "You are already logged in"
+      flash[:errors] = "You are already logged in"
       redirect "/products"
     end
   end
@@ -60,10 +60,10 @@ class UsersController < ApplicationController
       flash[:message] = "Login successful"
       redirect "/products"
     elsif user
-      flash[:message] = "Your password is incorrect. Please try again"
+      flash[:errors] = "Your password is incorrect. Please try again"
       redirect "/login"
     else
-      flash[:message] = "The username you enterred is not in the system. Please signup to access the application"
+      flash[:errors] = "The username you enterred is not in the system. Please signup to access the application"
       redirect "/signup"
     end
   end

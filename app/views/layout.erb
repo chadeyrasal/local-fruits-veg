@@ -9,13 +9,11 @@
 
   <body>
 
-    <p>Local Fruits & Veg</p>
+    <h1>Local Fruits & Veg</h1>
 
     <div class="nav">
       <% if logged_in? %>
-        <a href="/logout">Logout</a>
-        <a href="/products">All available products</a>
-        <a href="/products/new">New product</a>
+        <button><a href="/logout">Logout</a></button>
       <% end %>
 
       <% if logged_in? %>
