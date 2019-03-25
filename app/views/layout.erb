@@ -8,7 +8,10 @@
     <h1>Local Fruits & Veg</h1>
     <% if logged_in? %>
       <%= "You are logged in as " %><a href="/users/<%= current_user.slug %>"><%= current_user.username %></a>
+      <br><br>
+      <button type="button" name="logout"><a href="/logout">Logout</a></button>
     <% end %>
+
     <br><br>
     <%= yield %>
   </body>
