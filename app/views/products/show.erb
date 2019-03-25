@@ -10,10 +10,7 @@
 <%= @product.unit %>
 <br><br>
 
-<form action="/products/<%= @product.id %>" method="post">
-  <input id="hidden" type="hidden" name="_method" value="patch">
-  <input type="submit" value="Edit product">
-</form>
+<button><a href="/products/<%= @product.id %>/edit">Edit product</a></button>
 
 <form action="/products/<%= @product.id %>" method="post">
   <input id="hidden" type="hidden" name="method_" value="delete">
