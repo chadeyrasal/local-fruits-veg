@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
       flash[:errors] = "Please fill out the Name and Quantity fields to create a new product"
       redirect "/products/new"
     else
-      @product = Product.new(:name => params[:name], :quantity => params[:quantity], :unit => params[:unit])
+      @product = Product.new(:name => params[:name], :quantity => params[:quantity], :unit => params[:unit], :user_id => current_user.id)
       @product.save
       flash[:message] = "This product has been successfully created"
       redirect "/products/#{@product.id}"
@@ -85,8 +85,10 @@ class ProductsController < ApplicationController
       @product = Product.find_by(:id => params[:id])
       if @product && @product.user == current_user
         @product.delete
+        flash[:message] = "This product has successfully been deleted"
+      else
+        flash[:errors] = "You can only delete products that belong to you"
       end
-      flash[:errors] = "You can only delete products that belong to you"
       redirect "/products"
     else
       flash[:errors] = "Please signup or login to access this page"

@@ -8,39 +8,40 @@
   </head>
 
   <body>
+    <div class="full_wrap">
+      <h1>Local Fruits & Veg</h1>
 
-    <h1>Local Fruits & Veg</h1>
+      <div class="nav">
 
-    <div class="nav">
-      <% if logged_in? %>
-        <button><a href="/logout">Logout</a></button>
-      <% end %>
+        <% if logged_in? %>
+          <h4><%= "You are logged in as " %><a href="/users/<%= current_user.slug %>"><%= current_user.username %></a></h4>
+          <button><a href="/products/new">Create new product</a></button>
+          <button><a href="/products">See all products</a></button>
+          <button><a href="/logout">Logout</a></button>
+        <% end %>
 
-      <% if logged_in? %>
-        <h4><%= "You are logged in as " %><a href="/users/<%= current_user.slug %>"><%= current_user.username %></a></h4>
-      <% end %>
+      </div>
+
+      <div class="wrapper">
+
+        <% if flash[:message] %>
+          <h3 style="color: green;"><%= flash[:message] %></h3>
+        <% end %>
+        <% if flash[:errors] %>
+          <h3 style="color: red;"><%= flash[:errors] %></h3>
+        <% end %>
+
+        <%= yield %>
+
+        <br><br>
+
+        <footer class="branding">
+          <small>&copy; 2019 <strong>Local Fruits & Veg</strong></small>
+        </footer>
+
+      </div>
 
     </div>
-
-    <div class="wrapper">
-
-      <% if flash[:message] %>
-        <h3 style="color: green;"><%= flash[:message] %></h3>
-      <% end %>
-      <% if flash[:errors] %>
-        <h3 style="color: red;"><%= flash[:errors] %></h3>
-      <% end %>
-
-      <%= yield %>
-
-      <br><br>
-
-      <footer class="branding">
-        <small>&copy; 2019 <strong>Local Fruits & Veg</strong></small>
-      </footer>
-
-    </div>
-
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
   </body>
