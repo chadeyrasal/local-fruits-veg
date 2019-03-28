@@ -12,9 +12,11 @@
 <a href="/users/<%= @product.user.slug %>"><%= @product.user.username %></a>
 <br><br>
 
-<button><a href="/products/<%= @product.id %>/edit">Edit product</a></button>
+<% if @product.user == current_user %>
+  <button><a href="/products/<%= @product.id %>/edit">Edit product</a></button>
 
-<form action="/products/<%= @product.id %>" method="post">
-  <input id="hidden" type="hidden" name="method_" value="delete">
-  <input type="submit" value="Delete product">
-</form>
+  <form action="/products/<%= @product.id %>" method="post">
+    <input id="hidden" type="hidden" name="method_" value="delete">
+    <input type="submit" value="Delete product">
+  </form>
+<% end %>

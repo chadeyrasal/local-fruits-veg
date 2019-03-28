@@ -1,22 +1,14 @@
 class UsersController < ApplicationController
 
   get "/users" do
-    if logged_in?
-      erb :"users/index"
-    else
-      flash[:errors] = "Please signup or login to access this page"
-      redirect "/"
-    end
+    redirect_if_not_logged_in
+    erb :"users/index"
   end
 
   get "/users/:slug" do
-    if logged_in?
-      @user = User.find_by_slug(params[:slug])
-      erb :"users/show"
-    else
-      flash[:errors] = "Please signup or login to access this page"
-      redirect "/"
-    end
+    redirect_if_not_logged_in
+    @user = User.find_by_slug(params[:slug])
+    erb :"users/show"
   end
 
   get "/signup" do
@@ -69,13 +61,10 @@ class UsersController < ApplicationController
   end
 
   get "/logout" do
-    if logged_in?
-      session.clear
-      flash[:message] = "You have been logged out"
-      redirect "/"
-    else
-      redirect "/"
-    end
+    redirect_if_not_logged_in
+    session.clear
+    flash[:message] = "You have been logged out"
+    redirect "/"
   end
 
 end

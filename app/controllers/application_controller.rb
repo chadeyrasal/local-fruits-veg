@@ -34,6 +34,13 @@ class ApplicationController < Sinatra::Base
       end
     end
 
+    def redirect_if_not_logged_in
+      if !logged_in?
+        flash[:errors] = "Please signup or login to access this page"
+        redirect "/"
+      end
+    end
+
   end
 
 end
